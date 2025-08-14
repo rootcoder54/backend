@@ -1,8 +1,21 @@
 import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
 import shopRouter from "./routes/shop.route";
 import userRouter from "./routes/auth.route";
 
+dotenv.config();
+
 const app = express();
+
+app.use(
+  cors({
+    origin: "*", // Frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  })
+);
+
 app.use(express.json());
 
 app.use("/api/shops", shopRouter);

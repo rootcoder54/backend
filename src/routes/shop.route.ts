@@ -11,9 +11,11 @@ import {
   getShopById,
   updateShop
 } from "../services/shop.service";
+import authMiddleware from "../middleware/auth";
 
 //router.use(auth);
 const shopRouter = Router();
+shopRouter.use(authMiddleware);
 
 shopRouter.get("/", async (req, res) => {
   const shops = await getAllShop();
