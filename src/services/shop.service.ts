@@ -1,24 +1,77 @@
-import { Shop } from "@prisma/client";
-import prisma from "../config/prisma.js";
+import prisma from "../config/prisma";
 
 export const getAllShop = async () => {
-  return prisma.shop.findMany();
+  return prisma.shop.findMany({
+    include: {
+      users: true,
+      clients: true,
+      commandes: true,
+      fournisseurs: true,
+      categories: true,
+      mouvements: true,
+      produits: true,
+      adresse: true
+    }
+  });
 };
 
 export const getShopById = async (id: string) => {
   return prisma.shop.findUnique({
-    where: { id }
+    where: { id: id },
+    include: {
+      users: true,
+      clients: true,
+      commandes: true,
+      fournisseurs: true,
+      categories: true,
+      mouvements: true,
+      produits: true,
+      adresse: true
+    }
   });
 };
-export const createShop = async (shop: Shop) => {
+export const createShop = async (
+  name: string,
+  description: string,
+  adresse: string,
+  telephone: string,
+  email: string,
+  website: string,
+  logo: string
+) => {
   return prisma.shop.create({
-    data: shop
+    data: {
+      name,
+      description,
+      adresseId: adresse,
+      telephone,
+      email,
+      website,
+      logo
+    }
   });
 };
-export const updateShop = async (id: string, shop: Partial<Shop>) => {
+export const updateShop = async (
+  id: string,
+  name: string,
+  description: string,
+  adresse: string,
+  telephone: string,
+  email: string,
+  website: string,
+  logo: string
+) => {
   return prisma.shop.update({
     where: { id },
-    data: shop
+    data: {
+      name,
+      description,
+      adresseId: adresse,
+      telephone,
+      email,
+      website,
+      logo
+    }
   });
 };
 
