@@ -15,10 +15,10 @@ userRouter.post("/login", async (req, res) => {
     return res.status(400).json({ error: result.error });
   }
   const user = result.user;
-  const token = jwt.sign({ userId: user.id, username: user.username }, SECRET, {
+  const token = jwt.sign({ userId: user.id, user: user }, SECRET, {
     expiresIn: "30d"
   });
-  res.json({ token });
+  res.json({ message: "Connexion réussie", token: token });
 });
 
 userRouter.post("/register", async (req, res) => {
@@ -43,6 +43,19 @@ userRouter.post("/register", async (req, res) => {
     return res.status(400).json({ error: result.error });
   }
   res.json({ user: result.user });
+});
+
+userRouter.get("/profile", (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) return res.status(401).json({ error: "Token requis" });
+
+  const token = authHeader.split(" ")[1];
+  try {
+    const payload = jwt.verify(token, SECRET);
+    res.json({ payload });
+  } catch {
+    res.status(401).json({ error: "Token invalide" });
+  }
 });
 
 export default userRouter;
