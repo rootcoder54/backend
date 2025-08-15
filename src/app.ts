@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import shopRouter from "./routes/shop.route";
 import userRouter from "./routes/auth.route";
+import clientRouter from "./routes/client.route";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(
 app.use(express.json());
 
 app.use("/api/shops", shopRouter);
+app.use("/api/clients", clientRouter);
 app.use("/api/auth", userRouter);
 
 const PORT = process.env.PORT || 3000;
