@@ -63,7 +63,7 @@ fournisseurRouter.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const fournisseur = await deleteFournisseur(id);
   console.log(fournisseur);
-  res.json({ message: "Shop supprimé", fournisseur });
+  res.json({ message: "Fournisseur supprimé", fournisseur });
 });
 
 export default fournisseurRouter;

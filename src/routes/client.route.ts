@@ -50,7 +50,7 @@ clientRouter.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const client = await deleteClient(id);
   console.log(client);
-  res.json({ message: "Shop supprimé", client });
+  res.json({ message: "Client supprimé", client });
 });
 
 export default clientRouter;
