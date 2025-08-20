@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import shopRouter from "./routes/shop.route";
 import userRouter from "./routes/auth.route";
 import clientRouter from "./routes/client.route";
@@ -11,10 +12,11 @@ import produitRouter from "./routes/produit.route";
 dotenv.config();
 
 const app = express();
-
+app.use(cookieParser());
 app.use(
   cors({
-    origin: "*", // Frontend URL
+    origin: "http://localhost:80", // Frontend URL
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
   })

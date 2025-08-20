@@ -18,6 +18,12 @@ userRouter.post("/login", async (req, res) => {
   const token = jwt.sign({ userId: user.id, user: user }, SECRET, {
     expiresIn: "30d"
   });
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "none",
+    maxAge: 30 * 24 * 60 * 60 * 1000 // 30 jours
+  });
   res.json({ message: "Connexion réussie", token: token });
 });
 
@@ -45,14 +51,21 @@ userRouter.post("/register", async (req, res) => {
   res.json({ user: result.user });
 });
 
-userRouter.get("/profile", (req, res) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) return res.status(401).json({ error: "Token requis" });
+userRouter.post("/logout", (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict"
+  });
+  res.json({ message: "Déconnecté" });
+});
 
-  const token = authHeader.split(" ")[1];
+userRouter.get("/profile", (req, res) => {
+  const token = req.cookies.token;
+  if (!token) return res.status(401).json({ error: "Token requis" });
   try {
     const payload = jwt.verify(token, SECRET);
-    res.json({ payload });
+    res.json({ user: payload });
   } catch {
     res.status(401).json({ error: "Token invalide" });
   }
