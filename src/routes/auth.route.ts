@@ -61,8 +61,10 @@ userRouter.post("/logout", (req, res) => {
 });
 
 userRouter.get("/profile", (req, res) => {
+  /*const token = req.cookies.token;
+  if (!token) return res.status(401).json({ error: "Token requis" });*/
   const token = req.cookies.token;
-  if (!token) return res.status(401).json({ error: "Token requis" });
+  if (!token) return res.json({ user: null });
   try {
     const payload = jwt.verify(token, SECRET);
     res.json({ user: payload });
