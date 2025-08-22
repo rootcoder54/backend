@@ -18,7 +18,7 @@ const SECRET = process.env.JWT_SECRET || "secret_key";
 const authMiddleware = (req, res, next) => {
   const token = req.cookies?.token;
   if (!token)
-    return res.status(401).json({ error: "Authentification requise" });
+    return res.status(401).json({ error: "Authentification requise ici" });
 
   try {
     const payload = jwt.verify(token, SECRET);
