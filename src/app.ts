@@ -2,12 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import path from "path";
 import shopRouter from "./routes/shop.route";
 import userRouter from "./routes/auth.route";
 import clientRouter from "./routes/client.route";
 import fournisseurRouter from "./routes/fournisseur.route";
 import categorieRouter from "./routes/categorie.route";
 import produitRouter from "./routes/produit.route";
+import imageRouter from "./routes/image.route";
 
 dotenv.config();
 
@@ -16,7 +18,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ["http://localhost", "http://127.0.0.1", "http://localhost:80"], // Frontend URL
+    origin: ["http://localhost", "http://127.0.0.1", "http://localhost:80","*"], // Frontend URL
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
@@ -24,12 +26,14 @@ app.use(
 );
 
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.use("/api/shops", shopRouter);
 app.use("/api/clients", clientRouter);
 app.use("/api/fournisseurs", fournisseurRouter);
 app.use("/api/categories", categorieRouter);
 app.use("/api/produits", produitRouter);
+app.use("/api/images", imageRouter);
 app.use("/api/auth", userRouter);
 
 const PORT = process.env.PORT || 3000;
