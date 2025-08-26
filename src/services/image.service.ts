@@ -9,6 +9,15 @@ export const getImageById = async (id: string) => {
     where: { id: id }
   });
 };
+
+export const getImageByProduit = async (id: string) => {
+  return prisma.image.findMany({
+    where: {
+      produitId: id
+    }
+  });
+};
+
 export const addImage = async (url: string, produitId: string) => {
   return prisma.image.create({
     data: {

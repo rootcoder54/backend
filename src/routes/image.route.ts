@@ -17,6 +17,7 @@ import {
   addImage,
   deleteImage,
   getImageById,
+  getImageByProduit,
   getImages
 } from "../services/image.service";
 
@@ -35,6 +36,13 @@ imageRouter.get("/:id", async (req, res) => {
   const image = await getImageById(id);
   console.log(image);
   res.json(image);
+});
+
+imageRouter.get("/produits/:id", async (req, res) => {
+  const { id } = req.params;
+  const images = await getImageByProduit(id);
+  console.log(images);
+  res.json(images);
 });
 
 const storage = multer.diskStorage({
