@@ -6,13 +6,7 @@ const auth = require('../middleware/auth');
 import { Router } from "express";
 import multer from "multer";
 import authMiddleware from "../middleware/auth";
-import {
-  addProduit,
-  deleteProduit,
-  getProduitById,
-  getProduits,
-  updateProduit
-} from "../services/produit.service";
+
 import {
   addImage,
   deleteImage,
