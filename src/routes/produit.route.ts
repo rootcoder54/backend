@@ -20,14 +20,14 @@ produitRouter.use(authMiddleware);
 
 produitRouter.get("/", async (req, res) => {
   const produits = await getProduits();
-  console.log(produits);
+  //console.log(produits);
   res.json(produits);
 });
 
 produitRouter.get("/:id", async (req, res) => {
   const { id } = req.params;
   const produit = await getProduitById(id);
-  console.log(produit);
+  //console.log(produit);
   res.json(produit);
 });
 
@@ -55,7 +55,7 @@ produitRouter.post("/", async (req, res) => {
     fournisseurId,
     shopId
   );
-  console.log(produit);
+  //console.log(produit);
   res.json(produit);
 });
 
@@ -85,14 +85,14 @@ produitRouter.put("/:id", async (req, res) => {
     fournisseurId,
     shopId
   );
-  console.log(produit);
+  //console.log(produit);
   res.json(produit);
 });
 
 produitRouter.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const produit = await deleteProduit(id);
-  console.log(produit);
+  //console.log(produit);
   res.json({ message: "Produit supprimé", produit });
 });
 

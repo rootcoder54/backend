@@ -21,21 +21,21 @@ imageRouter.use(authMiddleware);
 
 imageRouter.get("/", async (req, res) => {
   const images = await getImages();
-  console.log(images);
+  //console.log(images);
   res.json(images);
 });
 
 imageRouter.get("/:id", async (req, res) => {
   const { id } = req.params;
   const image = await getImageById(id);
-  console.log(image);
+  //console.log(image);
   res.json(image);
 });
 
 imageRouter.get("/produits/:id", async (req, res) => {
   const { id } = req.params;
   const images = await getImageByProduit(id);
-  console.log(images);
+  //console.log(images);
   res.json(images);
 });
 
@@ -57,7 +57,7 @@ imageRouter.post("/", upload.single("image"), async (req, res) => {
       return res.status(400).json({ error: "Aucun fichier envoyé" });
 
     const image = await addImage(req.file.path, produitId);
-    console.log(image);
+    //console.log(image);
     res.json(image);
   } catch (error) {
     res.status(500).json({ error: "Erreur lors de l'upload" });
@@ -97,7 +97,7 @@ imageRouter.post("/", upload.single("image"), async (req, res) => {
 imageRouter.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const image = await deleteImage(id);
-  console.log(image);
+  //console.log(image);
   res.json({ message: "Produit supprimé", image });
 });
 

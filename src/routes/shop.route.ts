@@ -19,15 +19,15 @@ shopRouter.use(authMiddleware);
 
 shopRouter.get("/", async (req, res) => {
   const shops = await getAllShop();
-  console.log(shops);
+  //console.log(shops);
   res.json(shops);
 });
 
 shopRouter.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const shops = await getShopById(id);
-  console.log(shops);
-  res.json(shops);
+  const shop = await getShopById(id);
+  //console.log(shops);
+  res.json(shop);
 });
 
 shopRouter.post("/", async (req, res) => {
@@ -42,7 +42,7 @@ shopRouter.post("/", async (req, res) => {
     website,
     logo
   );
-  console.log(shop);
+  //console.log(shop);
   res.json(shop);
 });
 
@@ -60,14 +60,14 @@ shopRouter.put("/:id", async (req, res) => {
     website,
     logo
   );
-  console.log(shop);
+  //console.log(shop);
   res.json(shop);
 });
 
 shopRouter.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const shop = await deleteShop(id);
-  console.log(shop);
+  //console.log(shop);
   res.json({ message: "Shop supprimé", shop });
 });
 

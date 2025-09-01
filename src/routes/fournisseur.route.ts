@@ -20,14 +20,14 @@ fournisseurRouter.use(authMiddleware);
 
 fournisseurRouter.get("/", async (req, res) => {
   const fournisseurs = await getFournisseurs();
-  console.log(fournisseurs);
+  //console.log(fournisseurs);
   res.json(fournisseurs);
 });
 
 fournisseurRouter.get("/:id", async (req, res) => {
   const { id } = req.params;
   const fournisseur = await getFournisseurById(id);
-  console.log(fournisseur);
+  //console.log(fournisseur);
   res.json(fournisseur);
 });
 
@@ -40,7 +40,7 @@ fournisseurRouter.post("/", async (req, res) => {
     adresse,
     shopId
   );
-  console.log(fournisseur);
+  //console.log(fournisseur);
   res.json(fournisseur);
 });
 
@@ -55,14 +55,14 @@ fournisseurRouter.put("/:id", async (req, res) => {
     adresse,
     shopId
   );
-  console.log(fournisseur);
+  //console.log(fournisseur);
   res.json(fournisseur);
 });
 
 fournisseurRouter.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const fournisseur = await deleteFournisseur(id);
-  console.log(fournisseur);
+  //console.log(fournisseur);
   res.json({ message: "Fournisseur supprimé", fournisseur });
 });
 

@@ -20,21 +20,21 @@ categorieRouter.use(authMiddleware);
 
 categorieRouter.get("/", async (req, res) => {
   const categories = await getCategories();
-  console.log(categories);
+  //console.log(categories);
   res.json(categories);
 });
 
 categorieRouter.get("/:id", async (req, res) => {
   const { id } = req.params;
   const categorie = await getCategorieById(id);
-  console.log(categorie);
+  //console.log(categorie);
   res.json(categorie);
 });
 
 categorieRouter.post("/", async (req, res) => {
   const { nom, description, image, shopId } = req.body;
   const categorie = await addCategorie(nom, description, image, shopId);
-  console.log(categorie);
+  //console.log(categorie);
   res.json(categorie);
 });
 
@@ -42,14 +42,14 @@ categorieRouter.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { nom, description, image, shopId } = req.body;
   const categorie = await updateCategorie(id, nom, description, image, shopId);
-  console.log(categorie);
+  //console.log(categorie);
   res.json(categorie);
 });
 
 categorieRouter.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const categorie = await deleteCategorie(id);
-  console.log(categorie);
+  //console.log(categorie);
   res.json({ message: "Categorie supprimé", categorie });
 });
 
