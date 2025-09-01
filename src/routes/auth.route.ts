@@ -12,7 +12,7 @@ userRouter.post("/login", async (req, res) => {
   };
   const result = await login(username, password);
   if (result.error) {
-    return res.status(400).json({ error: result.error });
+    return res.json({ error: result.error });
   }
   const user = result.user;
   const token = jwt.sign({ userId: user.id, user: user }, SECRET, {
@@ -24,7 +24,7 @@ userRouter.post("/login", async (req, res) => {
     sameSite: "lax",
     maxAge: 30 * 24 * 60 * 60 * 1000 // 30 jours
   });
-  res.json({ message: "Connexion réussie", token: token });
+  res.json({ token: token });
 });
 
 userRouter.post("/register", async (req, res) => {
@@ -46,7 +46,7 @@ userRouter.post("/register", async (req, res) => {
     shopId
   );
   if (result.error) {
-    return res.status(400).json({ error: result.error });
+    return res.json({ error: result.error });
   }
   res.json({ user: result.user });
 });

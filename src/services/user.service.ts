@@ -8,6 +8,7 @@ export const login = async (username: string, password: string) => {
   if (!user) return { error: "Utilisateur introuvable" };
   const valid = await bcrypt.compare(password, user.password);
   if (!valid) return { error: "Mot de passe incorrect" };
+  delete user.password;
   return { user };
 };
 
